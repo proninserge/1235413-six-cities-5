@@ -5,6 +5,10 @@ env:
 
 extends: ['htmlacademy/es6', 'plugin:react/recommended']
 
+globals:
+  React: readonly
+  PropTypes: readonly
+
 parserOptions:
   ecmaFeatures:
     jsx: true

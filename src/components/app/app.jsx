@@ -1,29 +1,38 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+import {Fragment} from 'react';
 import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
-import MainScreen from '../main-screen/main-screen';
-import FavoritesScreen from '../favorites-screen/favorites-screen';
-import OfferScreen from '../offer-screen/offer-screen';
-import SignInScreen from '../sign-in-screen/sign-in-screen';
+
+import MainScreen from 'mainScreen';
+import FavoritesScreen from 'favoritesScreen';
+import OfferScreen from 'offerScreen';
+import SignInScreen from 'signInScreen';
 
 
 const App = (props) => {
-  const {offersCount} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainScreen offersCount={offersCount} />
-        </Route>
+        <Route exact
+          path="/"
+          render={({history}) => (
+            <MainScreen
+              offers={offers}
+              onOfferClick={() => history.push(`/offer/666`)}
+            />
+          )}
+        />
         <Route exact path="/favorites">
-          <FavoritesScreen />
+          <FavoritesScreen offers={offers} />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <OfferScreen />
+          <OfferScreen
+            offers={offers}
+            reviews={reviews}
+          />
         </Route>
         <Route
           render={() => (
@@ -43,7 +52,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default App;

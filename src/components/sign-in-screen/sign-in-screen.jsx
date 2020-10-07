@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SignInScreen = () => {
   return (
     <div className="page page--gray page--login">
