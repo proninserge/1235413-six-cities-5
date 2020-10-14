@@ -1,6 +1,6 @@
-import {PureComponent} from 'react';
+import {OFFER_PROP_SHAPE} from '@constants';
 
-class NewReview extends PureComponent {
+class NewReview extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -101,9 +101,7 @@ class NewReview extends PureComponent {
 }
 
 NewReview.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }).isRequired,
+  offer: OFFER_PROP_SHAPE,
 };
 
 export default NewReview;

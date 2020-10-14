@@ -1,10 +1,12 @@
 import {Fragment} from 'react';
 import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
 
-import MainScreen from 'mainScreen';
-import FavoritesScreen from 'favoritesScreen';
-import OfferScreen from 'offerScreen';
-import SignInScreen from 'signInScreen';
+import MainScreen from '@mainScreen';
+import FavoritesScreen from '@favoritesScreen';
+import OfferScreen from '@offerScreen';
+import SignInScreen from '@signInScreen';
+
+import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@constants';
 
 
 const App = (props) => {
@@ -52,8 +54,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  offers: OFFERS_PROP_TYPE,
+  reviews: REVIEWS_PROP_TYPE,
 };
 
 export default App;

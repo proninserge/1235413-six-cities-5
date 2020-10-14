@@ -1,4 +1,5 @@
-import ReviewItem from 'reviewItem';
+import ReviewItem from '../review-item/review-item';
+import {REVIEWS_PROP_TYPE} from '@constants';
 
 const ReviewList = (props) => {
   const {reviews} = props;
@@ -17,7 +18,7 @@ const ReviewList = (props) => {
 };
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired,
+  reviews: REVIEWS_PROP_TYPE,
 };
 
 export default ReviewList;

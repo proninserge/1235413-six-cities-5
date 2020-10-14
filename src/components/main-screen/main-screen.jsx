@@ -1,4 +1,6 @@
-import OfferList from 'offerList';
+import OfferList from '../offer-list/offer-list';
+import Map from '../map/map';
+import {OFFERS_PROP_TYPE} from '@constants';
 
 const MainScreen = (props) => {
   const {offers, onOfferClick} = props;
@@ -111,7 +113,9 @@ const MainScreen = (props) => {
 
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map offers={offers} />
+                </section>
               </div>
             </div>
           }
@@ -123,7 +127,7 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: OFFERS_PROP_TYPE,
   onOfferClick: PropTypes.func.isRequired,
 };
 
