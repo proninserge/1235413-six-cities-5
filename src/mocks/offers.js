@@ -14,7 +14,11 @@ export default [
     facilities: [`Wi-Fi`, `Washing machine`, `Towels`],
     isProUser: true,
     isBookmarked: true,
-    isPremium: true
+    isPremium: true,
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: 7653,
@@ -31,7 +35,11 @@ export default [
     facilities: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`],
     isProUser: false,
     isBookmarked: false,
-    isPremium: false
+    isPremium: false,
+    coordinates: {
+      lat: 52.369553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: 1267,
@@ -48,7 +56,11 @@ export default [
     facilities: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     isProUser: true,
     isBookmarked: true,
-    isPremium: false
+    isPremium: false,
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198,
+    },
   },
   {
     id: 8753,
@@ -65,6 +77,10 @@ export default [
     facilities: [],
     isProUser: true,
     isBookmarked: false,
-    isPremium: true
+    isPremium: true,
+    coordinates: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+    },
   },
 ];

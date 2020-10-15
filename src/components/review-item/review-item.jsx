@@ -1,3 +1,5 @@
+import {REVIEW_PROP_SHAPE} from '@constants';
+
 const ReviewItem = (props) => {
   const {review} = props;
 
@@ -28,13 +30,7 @@ const ReviewItem = (props) => {
 };
 
 ReviewItem.propTypes = {
-  review: PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.object.isRequired,
-  }).isRequired,
+  review: REVIEW_PROP_SHAPE,
 };
 
 export default ReviewItem;

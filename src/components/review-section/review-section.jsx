@@ -1,5 +1,6 @@
-import ReviewList from 'reviewList';
-import NewReview from 'newReview';
+import ReviewList from '../review-list/review-list';
+import NewReview from '../new-review/new-review';
+import {REVIEWS_PROP_TYPE, OFFER_PROP_SHAPE} from '@constants';
 
 const ReviewSection = (props) => {
   const {reviews, offer} = props;
@@ -17,10 +18,8 @@ const ReviewSection = (props) => {
 };
 
 ReviewSection.propTypes = {
-  reviews: PropTypes.array.isRequired,
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }).isRequired,
+  reviews: REVIEWS_PROP_TYPE,
+  offer: OFFER_PROP_SHAPE,
 };
 
 export default ReviewSection;

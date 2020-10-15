@@ -1,7 +1,7 @@
-import {PureComponent} from 'react';
-import OfferCard from 'offerCard';
+import OfferCard from '../offer-card/offer-card';
+import {OFFERS_PROP_TYPE} from '@constants';
 
-class OfferList extends PureComponent {
+class OfferList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -19,12 +19,13 @@ class OfferList extends PureComponent {
           <OfferCard
             key={offer.id}
             offer={offer}
-            onHover={() => {
+            onOfferHover={() => {
               this.setState(() => ({
                 offerActive: offer,
               }));
             }}
             onOfferClick={onOfferClick}
+            className={`cities`}
           />
         ))}
       </div>
@@ -33,7 +34,7 @@ class OfferList extends PureComponent {
 }
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: OFFERS_PROP_TYPE,
   onOfferClick: PropTypes.func.isRequired,
 };
 

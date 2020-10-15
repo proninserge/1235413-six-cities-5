@@ -1,4 +1,7 @@
-import ReviewSection from 'reviewSection';
+import ReviewSection from '../review-section/review-section';
+import Bookmark from '../bookmark/bookmark';
+import OfferCard from '../offer-card/offer-card';
+import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE, PROPERTY_AROUND_NUMBER} from '@constants';
 
 const OfferScreen = (props) => {
   const {offers, reviews} = props;
@@ -58,32 +61,18 @@ const OfferScreen = (props) => {
             <div className="property__wrapper">
 
               {offer.isPremium
-                ?
+                &&
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
-                : null}
+              }
 
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
 
-                {offer.isBookmarked
-                  ?
-                  <button className="property__bookmark-button property__bookmark-button--active button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">In bookmarks</span>
-                  </button>
-                  :
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>}
+                <Bookmark className={`property__bookmark`} isBookmarked={offer.isBookmarked} />
 
               </div>
               <div className="property__rating rating">
@@ -110,18 +99,18 @@ const OfferScreen = (props) => {
               </div>
 
               {offer.facilities.length !== 0
-                ?
+                &&
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
                     {offer.facilities.map((facility, index) =>(
-                      <li key={index} className="property__inside-item">
+                      <li key={`${facility}-${index}`} className="property__inside-item">
                         {facility}
                       </li>
                     ))}
                   </ul>
                 </div>
-                : null}
+              }
 
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
@@ -142,15 +131,15 @@ const OfferScreen = (props) => {
                 </div>
 
                 {offer.description.length !== 0
-                  ?
+                  &&
                   <div className="property__description">
                     {offer.description.map((text, index) => (
-                      <p key={index} className="property__text">
+                      <p key={`0-${index}`} className="property__text">
                         {text}
                       </p>
                     ))}
                   </div>
-                  : null}
+                }
 
               </div>
 
@@ -166,49 +155,8 @@ const OfferScreen = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
 
-              {offers.slice(0, 3).map((otherOffer) => (
-                <article key={otherOffer.id} className="near-places__card place-card">
-                  <div className="near-places__image-wrapper place-card__image-wrapper">
-                    <a href="#">
-                      <img className="place-card__image" src={otherOffer.image} width="260" height="200" alt="Place image" />
-                    </a>
-                  </div>
-                  <div className="place-card__info">
-                    <div className="place-card__price-wrapper">
-                      <div className="place-card__price">
-                        <b className="place-card__price-value">&euro;{otherOffer.price}</b>
-                        <span className="place-card__price-text">&#47;&nbsp;night</span>
-                      </div>
-
-                      {otherOffer.isBookmarked
-                        ?
-                        <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                          <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use xlinkHref="#icon-bookmark"></use>
-                          </svg>
-                          <span className="visually-hidden">In bookmarks</span>
-                        </button>
-                        :
-                        <button className="place-card__bookmark-button button" type="button">
-                          <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use xlinkHref="#icon-bookmark"></use>
-                          </svg>
-                          <span className="visually-hidden">To bookmarks</span>
-                        </button>}
-
-                    </div>
-                    <div className="place-card__rating rating">
-                      <div className="place-card__stars rating__stars">
-                        <span style={{width: `100%`}}></span>
-                        <span className="visually-hidden">Rating</span>
-                      </div>
-                    </div>
-                    <h2 className="place-card__name">
-                      <a href="#">{otherOffer.title}</a>
-                    </h2>
-                    <p className="place-card__type">{otherOffer.type}</p>
-                  </div>
-                </article>
+              {offers.slice(0, PROPERTY_AROUND_NUMBER).map((otherOffer) => (
+                <OfferCard key={otherOffer.id} onOfferHover={()=>({})} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
               ))}
 
             </div>
@@ -220,8 +168,8 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  offers: OFFERS_PROP_TYPE,
+  reviews: REVIEWS_PROP_TYPE,
 };
 
 export default OfferScreen;
