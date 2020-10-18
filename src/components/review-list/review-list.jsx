@@ -1,4 +1,4 @@
-import ReviewItem from '../review-item/review-item';
+import ReviewItem from './components/review-item/review-item';
 import {REVIEWS_PROP_TYPE} from '@constants';
 
 const ReviewList = (props) => {

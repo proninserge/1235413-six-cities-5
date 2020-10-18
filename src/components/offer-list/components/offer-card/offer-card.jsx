@@ -1,4 +1,4 @@
-import Bookmark from '../bookmark/bookmark';
+import Bookmark from '@components/bookmark/bookmark';
 import {OFFER_PROP_SHAPE} from '@constants';
 
 const OfferCard = (props) => {
@@ -23,7 +23,7 @@ const OfferCard = (props) => {
             evt.preventDefault();
             onOfferClick();
           }}>
-          <img className="place-card__image" src={offer.image} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.image} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${className === `favorites` ? `${className}__card-info` : ``}`}>

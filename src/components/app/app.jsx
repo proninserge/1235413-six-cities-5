@@ -1,16 +1,12 @@
 import {Fragment} from 'react';
 import {Switch, Route, BrowserRouter, Link} from 'react-router-dom';
 
-import MainScreen from '@mainScreen';
-import FavoritesScreen from '@favoritesScreen';
-import OfferScreen from '@offerScreen';
-import SignInScreen from '@signInScreen';
+import MainScreen from '@components/main-screen/main-screen';
+import FavoritesScreen from '@components/favorites-screen/favorites-screen';
+import OfferScreen from '@components/offer-screen/offer-screen';
+import SignInScreen from '@components/sign-in-screen/sign-in-screen';
 
-import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@constants';
-
-
-const App = (props) => {
-  const {offers, reviews} = props;
+const App = () => {
 
   return (
     <BrowserRouter>
@@ -19,22 +15,18 @@ const App = (props) => {
           path="/"
           render={({history}) => (
             <MainScreen
-              offers={offers}
               onOfferClick={() => history.push(`/offer/666`)}
             />
           )}
         />
         <Route exact path="/favorites">
-          <FavoritesScreen offers={offers} />
+          <FavoritesScreen />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <OfferScreen
-            offers={offers}
-            reviews={reviews}
-          />
+          <OfferScreen />
         </Route>
         <Route
           render={() => (
@@ -53,9 +45,6 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
-  offers: OFFERS_PROP_TYPE,
-  reviews: REVIEWS_PROP_TYPE,
-};
+App.propTypes = {};
 
 export default App;

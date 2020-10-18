@@ -5,21 +5,21 @@ import leaflet from 'leaflet';
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.mapContainer = React.createRef();
-    this.map = null;
+    this._mapContainer = React.createRef();
+    this._map = null;
   }
 
   render() {
     return (
       <div
         style={{height: `100%`}}
-        ref={this.mapContainer}
+        ref={this._mapContainer}
         id="map">
       </div>
     );
   }
 
-  componentDidMount() {
+  _renderMap() {
     const {offers} = this.props;
     const city = [52.38333, 4.9];
 
@@ -29,25 +29,34 @@ class Map extends React.Component {
     });
 
     const zoom = 12;
-    this.map = leaflet.map(`map`, {
+    this._map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(city, zoom);
+    this._map.setView(city, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this.map);
+      .addTo(this._map);
 
     offers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon})
-        .addTo(this.map);
+        .addTo(this._map);
     });
+  }
+
+  componentDidMount() {
+    this._renderMap();
+  }
+
+  componentDidUpdate() {
+    this._map.remove();
+    this._renderMap();
   }
 }
 
