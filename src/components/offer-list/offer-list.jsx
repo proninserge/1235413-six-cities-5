@@ -1,4 +1,4 @@
-import OfferCard from '../offer-card/offer-card';
+import OfferCard from './components/offer-card/offer-card';
 import {OFFERS_PROP_TYPE} from '@constants';
 
 class OfferList extends React.PureComponent {

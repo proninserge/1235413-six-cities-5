@@ -38,12 +38,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      '@': path.resolve(__dirname, './src/'),
       '@constants': path.resolve(__dirname, './src/constants'),
       '@app': path.resolve(__dirname, './src/components/app/app'),
-      '@mainScreen': path.resolve(__dirname, './src/components/main-screen/main-screen'),
-      '@favoritesScreen': path.resolve(__dirname, './src/components/favorites-screen/favorites-screen'),
-      '@offerScreen': path.resolve(__dirname, './src/components/offer-screen/offer-screen'),
-      '@signInScreen': path.resolve(__dirname, './src/components/sign-in-screen/sign-in-screen'),
+      '@components': path.resolve(__dirname, './src/components/'),
+      '@store': path.resolve(__dirname, './src/store/'),
     }
   },
   devtool: 'source-map',

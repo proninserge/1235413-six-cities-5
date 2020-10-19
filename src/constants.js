@@ -14,6 +14,11 @@ const OFFER_PROP_SHAPE = PropTypes.shape({
   isProUser: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
+  city: PropTypes.string.isRequired,
+  coordinates: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  })
 });
 
 const REVIEW_PROP_SHAPE = PropTypes.shape({
