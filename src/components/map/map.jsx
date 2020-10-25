@@ -1,31 +1,37 @@
-import {OFFERS_PROP_TYPE} from '@constants';
+import {OFFERS_PROP_TYPE, OFFER_PROP_SHAPE} from '@constants';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 
-class Map extends React.Component {
+import {connect} from 'react-redux';
+
+class Map extends React.PureComponent {
   constructor(props) {
     super(props);
     this._mapContainer = React.createRef();
     this._map = null;
   }
 
-  render() {
-    return (
-      <div
-        style={{height: `100%`}}
-        ref={this._mapContainer}
-        id="map">
-      </div>
-    );
+  componentDidMount() {
+    this._renderMap();
+  }
+
+  componentDidUpdate() {
+    this._map.remove();
+    this._renderMap();
   }
 
   _renderMap() {
-    const {offers} = this.props;
+    const {offers, hoveredOffer} = this.props;
     const city = [52.38333, 4.9];
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
+    });
+
+    const hoveredIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [27, 39]
     });
 
     const zoom = 12;
@@ -44,24 +50,38 @@ class Map extends React.Component {
       .addTo(this._map);
 
     offers.forEach((offer) => {
+      if (offer === hoveredOffer) {
+        leaflet
+          .marker(offer.coordinates, {icon: hoveredIcon})
+          .addTo(this._map);
+
+        return;
+      }
       leaflet
         .marker(offer.coordinates, {icon})
         .addTo(this._map);
     });
   }
 
-  componentDidMount() {
-    this._renderMap();
-  }
-
-  componentDidUpdate() {
-    this._map.remove();
-    this._renderMap();
+  render() {
+    return (
+      <div
+        style={{height: `100%`}}
+        ref={this._mapContainer}
+        id="map">
+      </div>
+    );
   }
 }
 
 Map.propTypes = {
+  hoveredOffer: OFFER_PROP_SHAPE,
   offers: OFFERS_PROP_TYPE,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  hoveredOffer: state.hoveredOffer,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

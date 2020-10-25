@@ -35,10 +35,18 @@ const REVIEWS_PROP_TYPE = PropTypes.arrayOf(REVIEW_PROP_SHAPE).isRequired;
 
 const PROPERTY_AROUND_NUMBER = 3;
 
+const Sorting = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
+};
+
 export {
   OFFERS_PROP_TYPE,
   REVIEWS_PROP_TYPE,
   OFFER_PROP_SHAPE,
   REVIEW_PROP_SHAPE,
   PROPERTY_AROUND_NUMBER,
+  Sorting,
 };
