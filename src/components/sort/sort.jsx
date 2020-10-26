@@ -1,19 +1,16 @@
 import {Sorting} from '@constants';
-import {connect} from 'react-redux';
 
 const Sort = (props) => {
-  const {sortType, onSortTypeClick} = props;
-  const [stateOpened, setState] = React.useState(false);
+  const {sortType, onSortTypeClick, resetHoveredOffer} = props;
+  const [stateOpened, setStateOpened] = React.useState(false);
 
-  const handleSortClick = (evt) => {
-    evt.preventDefault();
-    setState(!stateOpened);
+  const handleSortClick = () => {
+    setStateOpened(!stateOpened);
   };
 
-  const handleSortTypeClick = (evt) => {
-    evt.preventDefault();
-    setState(!stateOpened);
-    onSortTypeClick(evt.target.textContent);
+  const handleSortTypeClick = (sort) => {
+    setStateOpened(!stateOpened);
+    onSortTypeClick(sort);
   };
 
   return (
@@ -28,7 +25,15 @@ const Sort = (props) => {
       {stateOpened &&
         <ul className="places__options places__options--custom places__options--opened">
           {Object.values(Sorting).map((sort) => (
-            <li key={sort} onClick={handleSortTypeClick} className={`places__option ${sortType === sort ? `places__option--active` : ``}`} tabIndex="0">{sort}</li>
+            <li key={sort}
+              onClick={() => {
+                handleSortTypeClick(sort);
+                resetHoveredOffer();
+              }}
+              className={`places__option ${sortType === sort ? `places__option--active` : ``}`}
+              tabIndex="0">
+              {sort}
+            </li>
           ))}
         </ul>}
     </form>
@@ -36,15 +41,9 @@ const Sort = (props) => {
 };
 
 Sort.propTypes = {
-  onSortTypeClick: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
+  onSortTypeClick: PropTypes.func.isRequired,
+  resetHoveredOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  sortType: state.sortType,
-});
-
-const MemoizedSort = React.memo(Sort);
-
-export {MemoizedSort};
-export default connect(mapStateToProps)(MemoizedSort);
+export default Sort;

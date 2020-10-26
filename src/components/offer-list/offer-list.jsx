@@ -1,7 +1,5 @@
 import OfferCard from './components/offer-card/offer-card';
-import {OFFERS_PROP_TYPE} from '@constants';
-
-import {connect} from 'react-redux';
+import {OFFERS_PROP_TYPE} from '@/props-definition';
 
 const OfferList = (props) => {
   const {offers, onOfferClick, onOfferHover} = props;
@@ -27,9 +25,4 @@ OfferList.propTypes = {
   onOfferHover: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.sortedOffers,
-});
-
-export {OfferList};
-export default connect(mapStateToProps)(OfferList);
+export default OfferList;

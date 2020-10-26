@@ -1,8 +1,6 @@
-import {OFFERS_PROP_TYPE, OFFER_PROP_SHAPE} from '@constants';
+import {OFFERS_PROP_TYPE, OFFER_PROP_SHAPE} from '@/props-definition';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
-
-import {connect} from 'react-redux';
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -21,7 +19,7 @@ class Map extends React.PureComponent {
   }
 
   _renderMap() {
-    const {offers, hoveredOffer} = this.props;
+    const {offers, offer} = this.props;
     const city = [52.38333, 4.9];
 
     const icon = leaflet.icon({
@@ -49,8 +47,8 @@ class Map extends React.PureComponent {
       })
       .addTo(this._map);
 
-    offers.forEach((offer) => {
-      if (offer === hoveredOffer) {
+    offers.forEach((propertyOffer) => {
+      if (propertyOffer === offer) {
         leaflet
           .marker(offer.coordinates, {icon: hoveredIcon})
           .addTo(this._map);
@@ -58,7 +56,7 @@ class Map extends React.PureComponent {
         return;
       }
       leaflet
-        .marker(offer.coordinates, {icon})
+        .marker(propertyOffer.coordinates, {icon})
         .addTo(this._map);
     });
   }
@@ -75,13 +73,8 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  hoveredOffer: OFFER_PROP_SHAPE,
+  offer: OFFER_PROP_SHAPE,
   offers: OFFERS_PROP_TYPE,
 };
 
-const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer,
-});
-
-export {Map};
-export default connect(mapStateToProps)(Map);
+export default Map;

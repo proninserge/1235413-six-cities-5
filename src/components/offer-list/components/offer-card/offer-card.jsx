@@ -1,5 +1,5 @@
 import Bookmark from '@components/bookmark/bookmark';
-import {OFFER_PROP_SHAPE} from '@constants';
+import {OFFER_PROP_SHAPE} from '@/props-definition';
 
 const OfferCard = (props) => {
   const {onOfferClick, onOfferHover, offer, className} = props;

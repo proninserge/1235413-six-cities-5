@@ -1,4 +1,4 @@
-import {REVIEW_PROP_SHAPE} from '@constants';
+import {REVIEW_PROP_SHAPE} from '@/props-definition';
 
 const ReviewItem = (props) => {
   const {review} = props;

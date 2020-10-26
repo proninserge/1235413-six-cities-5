@@ -1,6 +1,6 @@
 import ReviewList from '@components/review-list/review-list';
 import NewReview from '@components/new-review/new-review';
-import {REVIEWS_PROP_TYPE, OFFER_PROP_SHAPE} from '@constants';
+import {REVIEWS_PROP_TYPE, OFFER_PROP_SHAPE} from '@/props-definition';
 
 const ReviewSection = (props) => {
   const {reviews, offer} = props;

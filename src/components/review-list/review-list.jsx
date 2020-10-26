@@ -1,5 +1,5 @@
 import ReviewItem from './components/review-item/review-item';
-import {REVIEWS_PROP_TYPE} from '@constants';
+import {REVIEWS_PROP_TYPE} from '@/props-definition';
 
 const ReviewList = (props) => {
   const {reviews} = props;
