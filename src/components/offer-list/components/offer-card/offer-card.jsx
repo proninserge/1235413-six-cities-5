@@ -9,7 +9,7 @@ const OfferCard = (props) => {
       className={`place-card ${className === `cities` ? `${className}__place-card` : `${className}__card`}`}
       onMouseOver={(evt) => {
         evt.preventDefault();
-        onOfferHover();
+        onOfferHover(offer);
       }}>
       {offer.isPremium
         &&
