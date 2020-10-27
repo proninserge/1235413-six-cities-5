@@ -1,7 +1,5 @@
-import {connect} from 'react-redux';
-
 const CityChange = (props) => {
-  const {currentCity, cities, onCityChange} = props;
+  const {currentCity, cities, onCityChange, resetHoveredOffer} = props;
 
   return (
     <section className="locations container">
@@ -12,6 +10,7 @@ const CityChange = (props) => {
               onClick={(evt) => {
                 evt.preventDefault();
                 onCityChange(city);
+                resetHoveredOffer();
               }}
               className={`locations__item-link tabs__item ${city === currentCity ? `tabs__item--active` : ``}`}
               href="#">
@@ -28,12 +27,7 @@ CityChange.propTypes = {
   onCityChange: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentCity: PropTypes.string.isRequired,
+  resetHoveredOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  cities: state.cities,
-});
-
-export {CityChange};
-export default connect(mapStateToProps)(CityChange);
+export default CityChange;

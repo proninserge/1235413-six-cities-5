@@ -1,14 +1,20 @@
-import OfferList from '@components/offer-list/offer-list';
+import OfferList from '@components/offer-list/offer-list.connect';
 import Map from '@components/map/map';
-import Sort from '@components/sort/sort';
-import CityChange from '@components/city-change/city-change';
-import {OFFERS_PROP_TYPE} from '@constants';
-
-import {connect} from 'react-redux';
-import {ActionCreator} from '@store/action';
+import Sort from '@components/sort/sort.connect';
+import CityChange from '@components/city-change/city-change.connect';
+import {OFFERS_PROP_TYPE} from '@/props-definition';
 
 const MainScreen = (props) => {
-  const {offers, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;
+  const {offers, city, onOfferClick, onCityChange, onSortTypeClick} = props;
+  const [hoveredOffer, setHoveredOffer] = React.useState(null);
+
+  const getHoveredOffer = (offer) => {
+    setHoveredOffer(offer);
+  };
+
+  const resetHoveredOffer = () => {
+    setHoveredOffer(null);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -39,7 +45,7 @@ const MainScreen = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
 
-          <CityChange onCityChange={onCityChange} />
+          <CityChange onCityChange={onCityChange} resetHoveredOffer={resetHoveredOffer}/>
 
         </div>
         <div className="cities">
@@ -60,14 +66,14 @@ const MainScreen = (props) => {
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{`${offers.length} ${offers.length > 1 ? `places` : `place`}`} to stay in {city}</b>
 
-                <Sort onSortTypeClick={onSortTypeClick}/>
+                <Sort onSortTypeClick={onSortTypeClick} resetHoveredOffer={resetHoveredOffer}/>
 
-                <OfferList onOfferClick={onOfferClick} onOfferHover={onOfferHover}/>
+                <OfferList onOfferClick={onOfferClick} onOfferHover={getHoveredOffer}/>
 
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map offers={offers} />
+                  <Map offers={offers} offer={hoveredOffer}/>
                 </section>
               </div>
             </div>
@@ -85,30 +91,6 @@ MainScreen.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onSortTypeClick: PropTypes.func.isRequired,
-  onOfferHover: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.currentCity,
-  offers: state.offersForCity,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(city) {
-    dispatch(ActionCreator.resetSortType());
-    dispatch(ActionCreator.resetHoveredOffer());
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.resetSortedOffers());
-    dispatch(ActionCreator.getOffers());
-  },
-  onOfferHover(offer) {
-    dispatch(ActionCreator.getHoveredOffer(offer));
-  },
-  onSortTypeClick(sort) {
-    dispatch(ActionCreator.resetHoveredOffer());
-    dispatch(ActionCreator.sortOffers(sort));
-  },
-});
-
-export {MainScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default MainScreen;

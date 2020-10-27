@@ -1,4 +1,4 @@
-import {OFFER_PROP_SHAPE} from '@constants';
+import {OFFER_PROP_SHAPE} from '@/props-definition';
 
 class NewReview extends React.PureComponent {
   constructor(props) {

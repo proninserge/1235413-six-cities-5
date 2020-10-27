@@ -1,11 +1,9 @@
 import OfferCard from '@components/offer-list/components/offer-card/offer-card';
-import {OFFERS_PROP_TYPE} from '@constants';
-
-import {connect} from 'react-redux';
+import {getFavoritesForCity} from '@components/favorites-screen/selectors/get-favorites-for-city';
+import {OFFERS_PROP_TYPE} from '@/props-definition';
 
 const FavoritesScreen = (props) => {
   const {offers, cities} = props;
-  const favoriteOffers = offers.filter((offer) => offer.isBookmarked);
 
   return (
     <div className="page">
@@ -38,7 +36,7 @@ const FavoritesScreen = (props) => {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {cities.map((city, index) => (
-                favoriteOffers.filter((offer) => offer.city === city).length > 0
+                getFavoritesForCity(offers, city).length > 0
                 &&
                 <li key={`${city}-${index}`} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
@@ -50,7 +48,7 @@ const FavoritesScreen = (props) => {
                   </div>
                   <div className="favorites__places">
 
-                    {favoriteOffers.filter((offer) => offer.city === city).map((offer) => (
+                    {getFavoritesForCity(offers, city).map((offer) => (
                       <OfferCard key={offer.id} onOfferHover={()=>({})} onOfferClick={()=>({})} offer={offer} className={`favorites`}/>
                     ))}
 
@@ -75,10 +73,4 @@ FavoritesScreen.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  cities: state.cities,
-});
-
-export {FavoritesScreen};
-export default connect(mapStateToProps)(FavoritesScreen);
+export default FavoritesScreen;

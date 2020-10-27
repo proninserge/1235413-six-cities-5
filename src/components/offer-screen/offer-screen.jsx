@@ -2,9 +2,8 @@ import ReviewSection from '@components/review-section/review-section';
 import Bookmark from '@components/bookmark/bookmark';
 import OfferCard from '@components/offer-list/components/offer-card/offer-card';
 import Map from '@components/map/map';
-import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE, PROPERTY_AROUND_NUMBER} from '@constants';
-
-import {connect} from 'react-redux';
+import {PROPERTY_AROUND_NUMBER} from '@constants';
+import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@/props-definition';
 
 const OfferScreen = (props) => {
   const {offers, reviews} = props;
@@ -177,10 +176,4 @@ OfferScreen.propTypes = {
   reviews: REVIEWS_PROP_TYPE,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offersForCity,
-  reviews: state.reviews,
-});
-
-export {OfferScreen};
-export default connect(mapStateToProps)(OfferScreen);
+export default OfferScreen;
