@@ -6,6 +6,11 @@ import OfferScreen from '@components/offer-screen/offer-screen.connect';
 import SignInScreen from '@components/sign-in-screen/sign-in-screen';
 
 const App = () => {
+  const [activeOffer, setActiveOffer] = React.useState(null);
+
+  const getActiveOffer = (offer) => {
+    setActiveOffer(offer);
+  };
 
   return (
     <BrowserRouter>
@@ -14,7 +19,10 @@ const App = () => {
           path="/"
           render={({history}) => (
             <MainScreen
-              onOfferClick={() => history.push(`/offer/666`)}
+              onOfferClick={(offer) => {
+                getActiveOffer(offer);
+                history.push(`/offer/${offer.id}`);
+              }}
             />
           )}
         />
@@ -25,7 +33,7 @@ const App = () => {
           <SignInScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <OfferScreen />
+          <OfferScreen offer={activeOffer}/>
         </Route>
         <Route
           render={() => (

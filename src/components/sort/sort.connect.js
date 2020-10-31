@@ -1,8 +1,8 @@
 import Sort from '@components/sort/sort';
 import {connect} from 'react-redux';
 
-const mapStateToProps = (state) => ({
-  sortType: state.sortType,
+const mapStateToProps = ({OFFERS}) => ({
+  sortType: OFFERS.sortType,
 });
 
 const MemoizedSort = React.memo(Sort);

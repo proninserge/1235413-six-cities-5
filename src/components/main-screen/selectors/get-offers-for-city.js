@@ -1,3 +1,15 @@
-const getOffersForCity = (state) => state.offers.filter((offer) => offer.city === state.currentCity);
+import {createSelector} from 'reselect';
 
-export {getOffersForCity};
+const getOffers = (state) => state.offers;
+
+const getCity = (state) => state.currentCity;
+
+const getOffersForCity = createSelector(
+    getOffers,
+    getCity,
+    (offers, city) => {
+      return offers.filter((offer) => offer.hotelCity.name === city);
+    }
+);
+
+export {getOffers, getCity, getOffersForCity};

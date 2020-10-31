@@ -20,7 +20,7 @@ class Map extends React.PureComponent {
 
   _renderMap() {
     const {offers, offer} = this.props;
-    const city = [52.38333, 4.9];
+    const city = [offers[0].hotelCity.location.lat, offers[0].hotelCity.location.lng];
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -32,7 +32,7 @@ class Map extends React.PureComponent {
       iconSize: [27, 39]
     });
 
-    const zoom = 12;
+    const zoom = offers[0].hotelCity.location.zoom;
     this._map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -50,13 +50,13 @@ class Map extends React.PureComponent {
     offers.forEach((propertyOffer) => {
       if (propertyOffer === offer) {
         leaflet
-          .marker(offer.coordinates, {icon: hoveredIcon})
+          .marker(offer.hotelLocation, {icon: hoveredIcon})
           .addTo(this._map);
 
         return;
       }
       leaflet
-        .marker(propertyOffer.coordinates, {icon})
+        .marker(propertyOffer.hotelLocation, {icon})
         .addTo(this._map);
     });
   }

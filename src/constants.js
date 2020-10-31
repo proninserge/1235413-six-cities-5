@@ -1,4 +1,5 @@
 const PROPERTY_AROUND_NUMBER = 3;
+const MAX_IMAGES_COUNT = 6;
 
 const Sorting = {
   POPULAR: `Popular`,
@@ -7,7 +8,14 @@ const Sorting = {
   TOP_RATED: `Top rated first`,
 };
 
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export {
   PROPERTY_AROUND_NUMBER,
+  MAX_IMAGES_COUNT,
   Sorting,
+  AuthorizationStatus,
 };
