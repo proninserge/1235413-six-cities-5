@@ -2,9 +2,9 @@ import FavoritesScreen from '@components/favorites-screen/favorites-screen';
 
 import {connect} from 'react-redux';
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  cities: state.cities,
+const mapStateToProps = ({OFFERS}) => ({
+  offers: OFFERS.offers,
+  cities: OFFERS.cities,
 });
 
 export default connect(mapStateToProps)(FavoritesScreen);

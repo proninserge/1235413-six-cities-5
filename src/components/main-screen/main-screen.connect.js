@@ -3,9 +3,9 @@ import {getOffersForCity} from '@components/main-screen/selectors/get-offers-for
 import {connect} from 'react-redux';
 import {ActionCreator} from '@store/action';
 
-const mapStateToProps = (state) => ({
-  city: state.currentCity,
-  offers: getOffersForCity(state),
+const mapStateToProps = ({OFFERS}) => ({
+  city: OFFERS.currentCity,
+  offers: getOffersForCity(OFFERS),
 });
 
 const mapDispatchToProps = (dispatch) => ({

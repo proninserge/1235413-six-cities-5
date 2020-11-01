@@ -43,6 +43,7 @@ module.exports = {
       '@app': path.resolve(__dirname, './src/components/app/app'),
       '@components': path.resolve(__dirname, './src/components/'),
       '@store': path.resolve(__dirname, './src/store/'),
+      '@services': path.resolve(__dirname, './src/services/'),
     }
   },
   devtool: 'source-map',

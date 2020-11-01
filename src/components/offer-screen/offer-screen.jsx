@@ -2,13 +2,21 @@ import ReviewSection from '@components/review-section/review-section';
 import Bookmark from '@components/bookmark/bookmark';
 import OfferCard from '@components/offer-list/components/offer-card/offer-card';
 import Map from '@components/map/map';
-import {PROPERTY_AROUND_NUMBER} from '@constants';
-import {OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@/props-definition';
+import {PROPERTY_AROUND_NUMBER, MAX_IMAGES_COUNT} from '@constants';
+import {OFFER_PROP_SHAPE, OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@/props-definition';
 
 const OfferScreen = (props) => {
-  const {offers, reviews} = props;
-  const offer = offers[offers.length - 1];
+  const {offer, offers, reviews} = props;
+  const [hoveredOffer, setHoveredOffer] = React.useState(null);
+
+  const getHoveredOffer = (mapOffer) => {
+    setHoveredOffer(mapOffer);
+  };
+
   const propertyReviews = reviews.filter((review) => review.id === offer.id);
+  const nearHotels = offers.slice(0, PROPERTY_AROUND_NUMBER);
+
+  const description = offer.description.split(`(?<=[.!?])\\s*`);
 
   return (
     <div className="page">
@@ -39,24 +47,13 @@ const OfferScreen = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+
+              {offer.images.slice(0, MAX_IMAGES_COUNT).map((image, index) => (
+                <div key={`0-${index}`} className="property__image-wrapper">
+                  <img className="property__image" src={image} alt="Photo studio"/>
+                </div>
+              ))}
+
             </div>
           </div>
           <div className="property__container container">
@@ -74,7 +71,7 @@ const OfferScreen = (props) => {
                   {offer.title}
                 </h1>
 
-                <Bookmark className={`property__bookmark`} isBookmarked={offer.isBookmarked} />
+                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} />
 
               </div>
               <div className="property__rating rating">
@@ -82,7 +79,7 @@ const OfferScreen = (props) => {
                   <span style={{width: `80%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{offer.rate}</span>
+                <span className="property__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -92,7 +89,7 @@ const OfferScreen = (props) => {
                   {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.adults} adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -100,12 +97,12 @@ const OfferScreen = (props) => {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
 
-              {offer.facilities.length !== 0
+              {offer.goods.length !== 0
                 &&
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {offer.facilities.map((facility, index) =>(
+                    {offer.goods.map((facility, index) =>(
                       <li key={`${facility}-${index}`} className="property__inside-item">
                         {facility}
                       </li>
@@ -117,25 +114,25 @@ const OfferScreen = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  {offer.isProUser
+                  {offer.hotelHost.isPro
                     ?
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={offer.avatar} width="74" height="74" alt="Host avatar"/>
+                      <img className="property__avatar user__avatar" src={offer.hotelHost.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     :
                     <div className="property__avatar-wrapper user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={offer.avatar} width="74" height="74" alt="Host avatar"/>
+                      <img className="property__avatar user__avatar" src={offer.hotelHost.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>}
 
                   <span className="property__user-name">
-                    {offer.host}
+                    {offer.hotelHost.name}
                   </span>
                 </div>
 
-                {offer.description.length !== 0
+                {description.length !== 0
                   &&
                   <div className="property__description">
-                    {offer.description.map((text, index) => (
+                    {description.map((text, index) => (
                       <p key={`0-${index}`} className="property__text">
                         {text}
                       </p>
@@ -150,7 +147,7 @@ const OfferScreen = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers.slice(0, PROPERTY_AROUND_NUMBER)} />
+            <Map offers={nearHotels} offer={hoveredOffer} />
           </section>
         </section>
 
@@ -159,8 +156,8 @@ const OfferScreen = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
 
-              {offers.slice(0, PROPERTY_AROUND_NUMBER).map((otherOffer) => (
-                <OfferCard key={otherOffer.id} onOfferHover={()=>({})} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
+              {nearHotels.map((otherOffer) => (
+                <OfferCard key={otherOffer.id} onOfferHover={getHoveredOffer} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
               ))}
 
             </div>
@@ -172,6 +169,7 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
+  offer: OFFER_PROP_SHAPE,
   offers: OFFERS_PROP_TYPE,
   reviews: REVIEWS_PROP_TYPE,
 };

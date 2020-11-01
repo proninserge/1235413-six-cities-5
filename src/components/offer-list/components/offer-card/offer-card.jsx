@@ -21,9 +21,9 @@ const OfferCard = (props) => {
           href="#"
           onClick={(evt) => {
             evt.preventDefault();
-            onOfferClick();
+            onOfferClick(offer);
           }}>
-          <img className="place-card__image" src={offer.image} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
+          <img className="place-card__image" src={offer.previewImage} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${className === `favorites` ? `${className}__card-info` : ``}`}>
@@ -33,7 +33,7 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <Bookmark className={`place-card__bookmark`} isBookmarked={offer.isBookmarked} />
+          <Bookmark className={`place-card__bookmark`} isFavorite={offer.isFavorite} />
 
         </div>
         <div className="place-card__rating rating">
