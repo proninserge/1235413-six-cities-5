@@ -1,20 +1,44 @@
-import ReviewSection from '@components/review-section/review-section';
-import Bookmark from '@components/bookmark/bookmark';
+import ReviewSection from '@components/review-section/review-section.connect';
+import {getStars} from '@/utils';
+import Preloader from '@components/preloader/preloader';
+import Navigation from '@components/navigation/navigation.connect';
+import Bookmark from '@components/bookmark/bookmark.connect';
 import OfferCard from '@components/offer-list/components/offer-card/offer-card';
 import Map from '@components/map/map';
-import {PROPERTY_AROUND_NUMBER, MAX_IMAGES_COUNT} from '@constants';
-import {OFFER_PROP_SHAPE, OFFERS_PROP_TYPE, REVIEWS_PROP_TYPE} from '@/props-definition';
+import {MAX_IMAGES_COUNT} from '@constants';
+import {REVIEWS_PROP_TYPE, OFFERS_PROP_TYPE} from '@/props-definition';
+import {useParams} from 'react-router-dom';
+import {getSortedReviews} from '@components/offer-screen/selectors/get-sorted-reviews';
 
 const OfferScreen = (props) => {
-  const {offer, offers, reviews} = props;
-  const [hoveredOffer, setHoveredOffer] = React.useState(null);
+  const {favoriteOffers, reviews, isAuthorized, onNavigationClick, getNearbyHotels, getCurrentOffer, onOfferClick, getReviewsForHotel} = props;
+  const {id} = useParams();
 
-  const getHoveredOffer = (mapOffer) => {
-    setHoveredOffer(mapOffer);
-  };
 
-  const propertyReviews = reviews.filter((review) => review.id === offer.id);
-  const nearHotels = offers.slice(0, PROPERTY_AROUND_NUMBER);
+  const [offer, setOffer] = React.useState(null);
+  const [nearbyHotels, setState] = React.useState(null);
+
+  React.useEffect(() => {
+    getCurrentOffer(id).then((data) => {
+      setOffer(data);
+    });
+  }, [id]);
+
+  React.useEffect(() => {
+    getNearbyHotels(id).then((data) => {
+      setState(data);
+    });
+  }, [id]);
+
+  React.useEffect(() => {
+    getReviewsForHotel(id);
+  }, [id]);
+
+  if (offer === null || nearbyHotels === null) {
+    return (
+      <Preloader />
+    );
+  }
 
   const description = offer.description.split(`(?<=[.!?])\\s*`);
 
@@ -24,21 +48,13 @@ const OfferScreen = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <a className="header__logo-link" href="#">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+
+            <Navigation onNavigationClick={onNavigationClick} />
+
           </div>
         </div>
       </header>
@@ -71,12 +87,12 @@ const OfferScreen = (props) => {
                   {offer.title}
                 </h1>
 
-                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} />
+                <Bookmark className={`property__bookmark`} offer={offer} />
 
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `80%`}}></span>
+                  <span style={{width: `${getStars(offer.rating)}`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -142,12 +158,12 @@ const OfferScreen = (props) => {
 
               </div>
 
-              <ReviewSection reviews={propertyReviews} offer={offer} />
+              <ReviewSection id={id} isAuthorized={isAuthorized} reviews={getSortedReviews(reviews)} />
 
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={nearHotels} offer={hoveredOffer} />
+            <Map offer={offer} offers={nearbyHotels}/>
           </section>
         </section>
 
@@ -156,8 +172,8 @@ const OfferScreen = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
 
-              {nearHotels.map((otherOffer) => (
-                <OfferCard key={otherOffer.id} onOfferHover={getHoveredOffer} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
+              {nearbyHotels.map((otherOffer) => (
+                <OfferCard key={otherOffer.id} onOfferHover={()=>({})} onOfferClick={onOfferClick} getNearbyHotels={()=>({})} favoriteOffers={favoriteOffers} offer={otherOffer} className={`near-places`}/>
               ))}
 
             </div>
@@ -169,9 +185,14 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
-  offer: OFFER_PROP_SHAPE,
-  offers: OFFERS_PROP_TYPE,
+  favoriteOffers: OFFERS_PROP_TYPE,
   reviews: REVIEWS_PROP_TYPE,
+  isAuthorized: PropTypes.bool.isRequired,
+  getNearbyHotels: PropTypes.func.isRequired,
+  onNavigationClick: PropTypes.func.isRequired,
+  getCurrentOffer: PropTypes.func.isRequired,
+  onOfferClick: PropTypes.func.isRequired,
+  getReviewsForHotel: PropTypes.func.isRequired,
 };
 
 export default OfferScreen;

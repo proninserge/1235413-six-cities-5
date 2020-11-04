@@ -1,9 +1,10 @@
 import ReviewList from '@components/review-list/review-list';
 import NewReview from '@components/new-review/new-review';
-import {REVIEWS_PROP_TYPE, OFFER_PROP_SHAPE} from '@/props-definition';
+import {REVIEWS_PROP_TYPE} from '@/props-definition';
 
 const ReviewSection = (props) => {
-  const {reviews, offer} = props;
+  const {isAuthorized, id, reviews, pushReviewForHotel} = props;
+
 
   return (
     <section className="property__reviews reviews">
@@ -11,15 +12,17 @@ const ReviewSection = (props) => {
 
       <ReviewList reviews={reviews} />
 
-      <NewReview offer={offer} />
+      {isAuthorized && <NewReview id={id} pushReviewForHotel={pushReviewForHotel} />}
 
     </section>
   );
 };
 
 ReviewSection.propTypes = {
+  id: PropTypes.string.isRequired,
   reviews: REVIEWS_PROP_TYPE,
-  offer: OFFER_PROP_SHAPE,
+  isAuthorized: PropTypes.bool.isRequired,
+  pushReviewForHotel: PropTypes.func.isRequired,
 };
 
 export default ReviewSection;

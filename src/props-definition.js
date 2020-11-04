@@ -9,6 +9,13 @@ const CITY_PROP_SHAPE = PropTypes.shape({
   location: LOCATION_PROP_SHAPE,
 }).isRequired;
 
+const PERSON_PROP_SHAPE = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  isPro: PropTypes.bool.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+}).isRequired;
+
 const OFFER_PROP_SHAPE = PropTypes.shape({
   hotelCity: CITY_PROP_SHAPE,
   previewImage: PropTypes.string.isRequired,
@@ -22,12 +29,7 @@ const OFFER_PROP_SHAPE = PropTypes.shape({
   maxAdults: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-  hotelHost: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    isPro: PropTypes.bool.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }).isRequired,
+  hotelHost: PERSON_PROP_SHAPE,
   description: PropTypes.string.isRequired,
   hotelLocation: LOCATION_PROP_SHAPE,
   id: PropTypes.number.isRequired,
@@ -36,11 +38,10 @@ const OFFER_PROP_SHAPE = PropTypes.shape({
 
 const REVIEW_PROP_SHAPE = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  author: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  rate: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
-  date: PropTypes.object.isRequired,
+  date: PropTypes.string.isRequired,
+  localUser: PERSON_PROP_SHAPE,
 });
 
 const OFFERS_PROP_TYPE = PropTypes.arrayOf(OFFER_PROP_SHAPE).isRequired;

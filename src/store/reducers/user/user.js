@@ -3,6 +3,7 @@ import {ActionType} from '@store/action';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userData: null,
 };
 
 const user = (state = initialState, action) => {
@@ -10,6 +11,10 @@ const user = (state = initialState, action) => {
     case ActionType.GET_AUTHORIZATION_STATUS:
       return Object.assign({}, state, {
         authorizationStatus: action.status,
+      });
+    case ActionType.GET_CREDENTIALS:
+      return Object.assign({}, state, {
+        userData: action.data,
       });
   }
 

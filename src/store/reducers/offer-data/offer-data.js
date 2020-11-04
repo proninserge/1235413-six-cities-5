@@ -1,22 +1,12 @@
 import {ActionType} from '@store/action';
-import {adaptToClient} from '@store/adapters';
 import {Sorting} from '@constants';
-
-const getAdaptedOffers = (offers) => {
-  return offers.map((offer) => adaptToClient(offer));
-};
-
-const getCities = (offers) => {
-  const allCities = new Set([...offers.map((offer) => offer.hotelCity.name)]);
-  return [...allCities];
-};
-
-const getInitialCity = (offers) => getCities(offers)[0];
+import {deleteOffer, getCities, getInitialCity} from '@/utils';
 
 const initialState = {
   offers: [],
   currentCity: null,
   cities: [],
+  favoriteOffers: [],
   sortType: Sorting.POPULAR,
 };
 
@@ -24,9 +14,9 @@ const offerData = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_OFFERS:
       return Object.assign({}, state, {
-        offers: getAdaptedOffers(action.offers),
-        cities: getCities(getAdaptedOffers(action.offers)),
-        currentCity: getInitialCity(getAdaptedOffers(action.offers)),
+        offers: action.offers,
+        cities: getCities(action.offers),
+        currentCity: getInitialCity(action.offers),
       });
     case ActionType.CITY_CHANGE:
       return Object.assign({}, state, {
@@ -39,6 +29,18 @@ const offerData = (state = initialState, action) => {
     case ActionType.RESET_SORT_TYPE:
       return Object.assign({}, state, {
         sortType: Sorting.POPULAR,
+      });
+    case ActionType.GET_FAVORITES:
+      return Object.assign({}, state, {
+        favoriteOffers: action.data,
+      });
+    case ActionType.PUSH_FAVORITE:
+      return Object.assign({}, state, {
+        favoriteOffers: [...state.favoriteOffers, action.data],
+      });
+    case ActionType.DELETE_FAVORITE:
+      return Object.assign({}, state, {
+        favoriteOffers: deleteOffer(state, action.data.id),
       });
     default: return state;
   }

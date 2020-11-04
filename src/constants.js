@@ -1,5 +1,10 @@
 const PROPERTY_AROUND_NUMBER = 3;
 const MAX_IMAGES_COUNT = 6;
+const MAX_REVIEWS_NUMBER = 10;
+const CommentSymbolCount = {
+  MIN: 50,
+  MAX: 300,
+};
 
 const Sorting = {
   POPULAR: `Popular`,
@@ -13,9 +18,20 @@ const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+const ResponseCode = {
+  SUCCESS: 200,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  SERVER_ERROR: 500,
+};
+
 export {
+  CommentSymbolCount,
+  MAX_REVIEWS_NUMBER,
   PROPERTY_AROUND_NUMBER,
   MAX_IMAGES_COUNT,
   Sorting,
   AuthorizationStatus,
+  ResponseCode,
 };
