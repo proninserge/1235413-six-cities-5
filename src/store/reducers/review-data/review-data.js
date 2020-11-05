@@ -1,15 +1,14 @@
-import reviews from '@/mocks/reviews';
 import {ActionType} from '@store/action';
 
 const initialState = {
-  reviews,
+  reviews: [],
 };
 
 const reviewData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CITY_CHANGE:
+    case ActionType.GET_REVIEWS:
       return Object.assign({}, state, {
-        reviews,
+        reviews: action.data,
       });
     default: return state;
   }

@@ -40,7 +40,7 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, './src/'),
       '@constants': path.resolve(__dirname, './src/constants'),
-      '@app': path.resolve(__dirname, './src/components/app/app'),
+      '@app': path.resolve(__dirname, './src/components/app/app.connect'),
       '@components': path.resolve(__dirname, './src/components/'),
       '@store': path.resolve(__dirname, './src/store/'),
       '@services': path.resolve(__dirname, './src/services/'),

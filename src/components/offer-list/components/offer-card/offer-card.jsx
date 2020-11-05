@@ -1,5 +1,6 @@
-import Bookmark from '@components/bookmark/bookmark';
+import Bookmark from '@components/bookmark/bookmark.connect';
 import {OFFER_PROP_SHAPE} from '@/props-definition';
+import {getStars} from '@/utils';
 
 const OfferCard = (props) => {
   const {onOfferClick, onOfferHover, offer, className} = props;
@@ -33,12 +34,12 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <Bookmark className={`place-card__bookmark`} isFavorite={offer.isFavorite} />
+          <Bookmark className={`place-card__bookmark`} offer={offer} />
 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: `${getStars(offer.rating)}`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -47,7 +48,7 @@ const OfferCard = (props) => {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onOfferClick();
+              onOfferClick(offer);
             }}>
             {offer.title}
           </a>

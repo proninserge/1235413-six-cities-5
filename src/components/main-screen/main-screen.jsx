@@ -1,4 +1,5 @@
 import OfferList from '@components/offer-list/offer-list.connect';
+import Navigation from '@components/navigation/navigation.connect';
 import EmptyMainScreen from '@components/main-screen/components/empty-main-screen/empty-main-screen';
 import Map from '@components/map/map';
 import Sort from '@components/sort/sort.connect';
@@ -6,7 +7,7 @@ import CityChange from '@components/city-change/city-change.connect';
 import {OFFERS_PROP_TYPE} from '@/props-definition';
 
 const MainScreen = (props) => {
-  const {offers, city, onOfferClick, onCityChange, onSortTypeClick} = props;
+  const {offers, city, onOfferClick, onCityChange, onSortTypeClick, onNavigationClick} = props;
   const [hoveredOffer, setHoveredOffer] = React.useState(null);
 
   const getHoveredOffer = (offer) => {
@@ -27,17 +28,9 @@ const MainScreen = (props) => {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+
+            <Navigation onNavigationClick={onNavigationClick} />
+
           </div>
         </div>
       </header>
@@ -84,6 +77,7 @@ MainScreen.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onSortTypeClick: PropTypes.func.isRequired,
+  onNavigationClick: PropTypes.func.isRequired,
 };
 
 export default MainScreen;
