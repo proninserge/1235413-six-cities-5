@@ -1,5 +1,4 @@
 import {OFFERS_PROP_TYPE, OFFER_PROP_SHAPE} from '@/props-definition';
-import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 
 class Map extends React.PureComponent {

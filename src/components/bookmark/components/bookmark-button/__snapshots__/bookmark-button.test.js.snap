@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BookmarkButton /> render correctly renders Bookmark button if favorite 1`] = `
+<button
+  className="main-button button main-button--active"
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    className="main-icon"
+    height="19"
+    width="18"
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    In bookmarks
+  </span>
+</button>
+`;
+
+exports[`<BookmarkButton /> render correctly renders Bookmark button if not favorite 1`] = `
+<button
+  className="main-button button "
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    className="main-icon"
+    height="19"
+    width="18"
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    To bookmarks
+  </span>
+</button>
+`;

@@ -1,5 +1,5 @@
 import {Route, Redirect} from 'react-router-dom';
-import {AuthorizationStatus} from '@constants';
+import {AppRoute, AuthorizationStatus} from '@constants';
 
 
 const PrivateRoute = (props) => {
@@ -13,7 +13,7 @@ const PrivateRoute = (props) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
             ? render(routeProps)
-            : <Redirect to={`/login`} />
+            : <Redirect to={AppRoute.LOGIN} />
         );
       }}
     />

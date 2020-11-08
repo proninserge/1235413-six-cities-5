@@ -9,9 +9,7 @@ const mapStateToProps = ({OFFERS, USER}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onBookmarkClick(id, mark) {
-    return Promise.resolve(dispatch(ApiActionCreator.handleFavorites(id, mark)));
-  }
+  onBookmarkClick: (id, mark) => dispatch(ApiActionCreator.handleFavorites(id, mark))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bookmark);

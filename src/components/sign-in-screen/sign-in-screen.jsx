@@ -1,5 +1,6 @@
 import Navigation from '@components/navigation/navigation.connect';
 import {Redirect} from 'react-router-dom';
+import {AppRoute} from '@constants';
 
 class SignInScreen extends React.PureComponent {
   constructor(props) {
@@ -13,11 +14,15 @@ class SignInScreen extends React.PureComponent {
 
   handleSubmit(evt) {
     const {onSubmit} = this.props;
+    const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     evt.preventDefault();
-    onSubmit({
-      email: this.emailRef.current.value,
-      password: this.passwordRef.current.value,
-    });
+
+    if (EMAIL_REGEXP.test(this.emailRef.current.value) && this.passwordRef.current.value) {
+      onSubmit({
+        email: this.emailRef.current.value,
+        password: this.passwordRef.current.value,
+      });
+    }
   }
 
   render() {
@@ -25,7 +30,7 @@ class SignInScreen extends React.PureComponent {
 
     if (isAuthorized) {
       return (
-        <Redirect to={`/`} />
+        <Redirect to={AppRoute.ROOT} />
       );
     }
 

@@ -2,6 +2,7 @@ import BookmarkButton from '@components/bookmark/components/bookmark-button/book
 import {Link} from 'react-router-dom';
 import {checkFavorite} from '@components/bookmark/selectors/check-favorite';
 import {OFFERS_PROP_TYPE, OFFER_PROP_SHAPE} from '@/props-definition';
+import {AppRoute, FavoriteStatus} from '@constants';
 
 const Bookmark = (props) => {
   const {offer, favoriteOffers, isAuthorized, className, onBookmarkClick} = props;
@@ -10,8 +11,8 @@ const Bookmark = (props) => {
 
   if (!isAuthorized) {
     return (
-      <Link to={`/login`}>
-        <BookmarkButton onClick={()=>({})} isFavorite={isFavorite} className={className}/>
+      <Link to={AppRoute.LOGIN}>
+        <BookmarkButton isFavorite={isFavorite} className={className}/>
       </Link>
     );
   }
@@ -19,7 +20,7 @@ const Bookmark = (props) => {
   return (
     <BookmarkButton isFavorite={isFavorite} className={className} onClick={(evt) => {
       evt.preventDefault();
-      const mark = isFavorite ? 0 : 1;
+      const mark = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
       onBookmarkClick(offer.id, mark);
     }}/>
   );

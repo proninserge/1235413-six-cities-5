@@ -1,8 +1,5 @@
 import {REVIEW_PROP_SHAPE} from '@/props-definition';
-import {getStars} from '@/utils';
-import moment from 'moment';
-
-const getReadableDate = (date) => moment(date, `YYYY/MM/DD H:mm Z`).format(`MMMM YYYY`);
+import {getReadableDate, getStars} from '@/utils';
 
 const ReviewItem = (props) => {
   const {review} = props;

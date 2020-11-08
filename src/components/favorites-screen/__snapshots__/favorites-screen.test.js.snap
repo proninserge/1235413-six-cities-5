@@ -1,0 +1,451 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers 1`] = `
+<div
+  className="page"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="header__wrapper"
+      >
+        <div
+          className="header__left"
+        >
+          <a
+            className="header__logo-link"
+            href="#"
+          >
+            <img
+              alt="6 cities logo"
+              className="header__logo"
+              height="41"
+              src="img/logo.svg"
+              width="81"
+            />
+          </a>
+        </div>
+        <nav
+          className="header__nav"
+        >
+          <ul
+            className="header__nav-list"
+          >
+            <li
+              className="header__nav-item user"
+            >
+              <a
+                className="header__nav-link header__nav-link--profile"
+                href="#"
+                onClick={[Function]}
+              >
+                <div
+                  className="header__avatar-wrapper user__avatar-wrapper"
+                />
+                <span
+                  className="header__login"
+                >
+                  Sign in
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main
+    className="page__main page__main--favorites"
+  >
+    <div
+      className="page__favorites-container container"
+    >
+      <section
+        className="favorites"
+      >
+        <h1
+          className="favorites__title"
+        >
+          Saved listing
+        </h1>
+        <ul
+          className="favorites__list"
+        >
+          <li
+            className="favorites__locations-items"
+          >
+            <div
+              className="favorites__locations locations locations--current"
+            >
+              <div
+                className="locations__item"
+              >
+                <a
+                  className="locations__item-link"
+                  href="#"
+                >
+                  <span>
+                    Lafayette
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div
+              className="favorites__places"
+            >
+              <article
+                className="place-card favorites__card"
+                onMouseOver={[Function]}
+              >
+                <div
+                  className="place-card__mark"
+                >
+                  <span>
+                    Premium
+                  </span>
+                </div>
+                <div
+                  className="place-card__image-wrapper favorites__image-wrapper"
+                >
+                  <a
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <img
+                      alt="Place image"
+                      className="place-card__image"
+                      height="110"
+                      src="mock"
+                      width="150"
+                    />
+                  </a>
+                </div>
+                <div
+                  className="place-card__info favorites__card-info"
+                >
+                  <div
+                    className="place-card__price-wrapper"
+                  >
+                    <div
+                      className="place-card__price"
+                    >
+                      <b
+                        className="place-card__price-value"
+                      >
+                        €
+                        22
+                      </b>
+                      <span
+                        className="place-card__price-text"
+                      >
+                        / night
+                      </span>
+                    </div>
+                    <a
+                      href="/login"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="place-card__bookmark-button button "
+                        type="button"
+                      >
+                        <svg
+                          className="place-card__bookmark-icon"
+                          height="19"
+                          width="18"
+                        >
+                          <use
+                            xlinkHref="#icon-bookmark"
+                          />
+                        </svg>
+                        <span
+                          className="visually-hidden"
+                        >
+                          To bookmarks
+                        </span>
+                      </button>
+                    </a>
+                  </div>
+                  <div
+                    className="place-card__rating rating"
+                  >
+                    <div
+                      className="place-card__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <h2
+                    className="place-card__name"
+                  >
+                    <a
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      mock
+                    </a>
+                  </h2>
+                  <p
+                    className="place-card__type"
+                  >
+                    Hotel
+                  </p>
+                </div>
+              </article>
+              <article
+                className="place-card favorites__card"
+                onMouseOver={[Function]}
+              >
+                <div
+                  className="place-card__mark"
+                >
+                  <span>
+                    Premium
+                  </span>
+                </div>
+                <div
+                  className="place-card__image-wrapper favorites__image-wrapper"
+                >
+                  <a
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <img
+                      alt="Place image"
+                      className="place-card__image"
+                      height="110"
+                      src="mock"
+                      width="150"
+                    />
+                  </a>
+                </div>
+                <div
+                  className="place-card__info favorites__card-info"
+                >
+                  <div
+                    className="place-card__price-wrapper"
+                  >
+                    <div
+                      className="place-card__price"
+                    >
+                      <b
+                        className="place-card__price-value"
+                      >
+                        €
+                        22
+                      </b>
+                      <span
+                        className="place-card__price-text"
+                      >
+                        / night
+                      </span>
+                    </div>
+                    <a
+                      href="/login"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="place-card__bookmark-button button "
+                        type="button"
+                      >
+                        <svg
+                          className="place-card__bookmark-icon"
+                          height="19"
+                          width="18"
+                        >
+                          <use
+                            xlinkHref="#icon-bookmark"
+                          />
+                        </svg>
+                        <span
+                          className="visually-hidden"
+                        >
+                          To bookmarks
+                        </span>
+                      </button>
+                    </a>
+                  </div>
+                  <div
+                    className="place-card__rating rating"
+                  >
+                    <div
+                      className="place-card__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <h2
+                    className="place-card__name"
+                  >
+                    <a
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      mock
+                    </a>
+                  </h2>
+                  <p
+                    className="place-card__type"
+                  >
+                    Hotel
+                  </p>
+                </div>
+              </article>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer
+    className="footer container"
+  >
+    <a
+      className="footer__logo-link"
+      href="main.html"
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/o offers 1`] = `
+<div
+  className="page"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="header__wrapper"
+      >
+        <div
+          className="header__left"
+        >
+          <a
+            className="header__logo-link"
+            href="#"
+          >
+            <img
+              alt="6 cities logo"
+              className="header__logo"
+              height="41"
+              src="img/logo.svg"
+              width="81"
+            />
+          </a>
+        </div>
+        <nav
+          className="header__nav"
+        >
+          <ul
+            className="header__nav-list"
+          >
+            <li
+              className="header__nav-item user"
+            >
+              <a
+                className="header__nav-link header__nav-link--profile"
+                href="#"
+                onClick={[Function]}
+              >
+                <div
+                  className="header__avatar-wrapper user__avatar-wrapper"
+                />
+                <span
+                  className="header__login"
+                >
+                  Sign in
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main
+    className="page__main page__main--favorites"
+  >
+    <div
+      className="page__favorites-container container"
+    >
+      <section
+        className="favorites favorites--empty"
+      >
+        <h1
+          className="visually-hidden"
+        >
+          Favorites (empty)
+        </h1>
+        <div
+          className="favorites__status-wrapper"
+        >
+          <b
+            className="favorites__status"
+          >
+            Nothing yet saved.
+          </b>
+          <p
+            className="favorites__status-description"
+          >
+            Save properties to narrow down search or plan yor future trips.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer
+    className="footer container"
+  >
+    <a
+      className="footer__logo-link"
+      href="main.html"
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
+</div>
+`;

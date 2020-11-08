@@ -1,40 +1,27 @@
 import ReviewSection from '@components/review-section/review-section.connect';
-import {getStars} from '@/utils';
+import {getType, getStars} from '@/utils';
 import Preloader from '@components/preloader/preloader';
 import Navigation from '@components/navigation/navigation.connect';
 import Bookmark from '@components/bookmark/bookmark.connect';
 import OfferCard from '@components/offer-list/components/offer-card/offer-card';
 import Map from '@components/map/map';
 import {MAX_IMAGES_COUNT} from '@constants';
-import {REVIEWS_PROP_TYPE, OFFERS_PROP_TYPE} from '@/props-definition';
+import {REVIEWS_PROP_TYPE, OFFER_PROP_SHAPE, OFFERS_PROP_TYPE} from '@/props-definition';
 import {useParams} from 'react-router-dom';
 import {getSortedReviews} from '@components/offer-screen/selectors/get-sorted-reviews';
 
 const OfferScreen = (props) => {
-  const {favoriteOffers, reviews, isAuthorized, onNavigationClick, getNearbyHotels, getCurrentOffer, onOfferClick, getReviewsForHotel} = props;
+  const {offer, nearbyHotels, reviews, isAuthorized, resetActiveOffer, onNavigationClick, getNearbyHotels, getCurrentOffer, onOfferClick, getReviewsForHotel} = props;
   const {id} = useParams();
 
-
-  const [offer, setOffer] = React.useState(null);
-  const [nearbyHotels, setState] = React.useState(null);
-
   React.useEffect(() => {
-    getCurrentOffer(id).then((data) => {
-      setOffer(data);
-    });
-  }, [id]);
-
-  React.useEffect(() => {
-    getNearbyHotels(id).then((data) => {
-      setState(data);
-    });
-  }, [id]);
-
-  React.useEffect(() => {
+    getNearbyHotels(id);
+    getCurrentOffer(id);
+    resetActiveOffer();
     getReviewsForHotel(id);
   }, [id]);
 
-  if (offer === null || nearbyHotels === null) {
+  if (offer === null || nearbyHotels.length === 0) {
     return (
       <Preloader />
     );
@@ -99,7 +86,7 @@ const OfferScreen = (props) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {getType(offer.type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms
@@ -173,7 +160,7 @@ const OfferScreen = (props) => {
             <div className="near-places__list places__list">
 
               {nearbyHotels.map((otherOffer) => (
-                <OfferCard key={otherOffer.id} onOfferHover={()=>({})} onOfferClick={onOfferClick} getNearbyHotels={()=>({})} favoriteOffers={favoriteOffers} offer={otherOffer} className={`near-places`}/>
+                <OfferCard key={otherOffer.id} onOfferHover={()=>({})} onOfferClick={onOfferClick} offer={otherOffer} className={`near-places`}/>
               ))}
 
             </div>
@@ -185,13 +172,15 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
-  favoriteOffers: OFFERS_PROP_TYPE,
+  offer: OFFER_PROP_SHAPE,
+  nearbyHotels: OFFERS_PROP_TYPE,
   reviews: REVIEWS_PROP_TYPE,
   isAuthorized: PropTypes.bool.isRequired,
   getNearbyHotels: PropTypes.func.isRequired,
   onNavigationClick: PropTypes.func.isRequired,
   getCurrentOffer: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
+  resetActiveOffer: PropTypes.func.isRequired,
   getReviewsForHotel: PropTypes.func.isRequired,
 };
 

@@ -18,7 +18,7 @@ const getSortedOffers = createSelector(
         case Sorting.PRICE_HIGH_TO_LOW:
           return offersForCity.sort((a, b) => b.price - a.price);
         case Sorting.TOP_RATED:
-          return offersForCity.sort((a, b) => a.rating - b.rating);
+          return offersForCity.sort((a, b) => b.rating - a.rating);
         default:
           return offersForCity;
       }

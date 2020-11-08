@@ -7,6 +7,7 @@ import OfferScreen from '@components/offer-screen/offer-screen.connect';
 import SignInScreen from '@components/sign-in-screen/sign-in-screen.connect';
 import PrivateRoute from '@components/private-route/private-route.connect';
 import {handleNavigationClick} from '@/utils';
+import {AppRoute} from '@constants';
 
 import browserHistory from '@/browser-history';
 
@@ -31,7 +32,7 @@ const App = (props) => {
       <Switch>
 
         <Route exact
-          path="/"
+          path={AppRoute.ROOT}
           render={({history}) => (
             <MainScreen
               onOfferClick={(offer) => {
@@ -45,7 +46,7 @@ const App = (props) => {
         />
 
         <PrivateRoute exact
-          path={`/favorites`}
+          path={AppRoute.FAVORITES}
           render={({history}) => {
             return (
               <FavoritesScreen
@@ -58,14 +59,14 @@ const App = (props) => {
         />
 
         <Route exact
-          path="/login"
+          path={AppRoute.LOGIN}
           render={() => (
             <SignInScreen onNavigationClick={() => ({})} />
           )}
         />
 
         <Route exact
-          path="/offer/:id"
+          path={AppRoute.OFFER}
           render={({history}) => (
             <OfferScreen
               onOfferClick={(offer) => {
@@ -78,11 +79,11 @@ const App = (props) => {
         />
 
         <Route exact
-          path="/error"
+          path={AppRoute.ERROR}
           render={() => (
             <>
-              <h1 style={{textAlign: `center`}}>
-                4- or 5- something. Whatever.
+              <h1 style={{textAlign: `center`, position: `fixed`, top: `50%`, left: `50%`, transform: `translate(-50%, -50%)`}}>
+                404 or 5- something. Whatever.
                 <br />
                 <small>Something wrong has happened. Hold on, we are fixing the issue. Please, refresh the page a bit later.</small>
               </h1>

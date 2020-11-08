@@ -1,6 +1,6 @@
 import Bookmark from '@components/bookmark/bookmark.connect';
 import {OFFER_PROP_SHAPE} from '@/props-definition';
-import {getStars} from '@/utils';
+import {getType, getStars} from '@/utils';
 
 const OfferCard = (props) => {
   const {onOfferClick, onOfferHover, offer, className} = props;
@@ -53,7 +53,7 @@ const OfferCard = (props) => {
             {offer.title}
           </a>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{getType(offer.type)}</p>
       </div>
     </article>
   );
@@ -62,7 +62,7 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
-  onOfferHover: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func,
   offer: OFFER_PROP_SHAPE,
   className: PropTypes.string.isRequired,
 };

@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import App from '@components/app/app.connect';
+import 'leaflet/dist/leaflet.css';
 
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';

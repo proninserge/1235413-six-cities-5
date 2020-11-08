@@ -17,7 +17,6 @@ const user = (state = initialState, action) => {
         userData: action.data,
       });
   }
-
   return state;
 };
 

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/ the offer & no reviews if authorized 1`] = `null`;
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/ the offer & no reviews if not authorized 1`] = `null`;
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/ the offer & reviews if authorized 1`] = `null`;
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/ the offer & reviews if not authorized 1`] = `null`;
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/o the nearby offers 1`] = `null`;
+
+exports[`<OfferScreen /> render correctly renders Offer Screen w/o the offer 1`] = `null`;
