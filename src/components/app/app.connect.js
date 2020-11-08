@@ -1,19 +1,11 @@
 import App from '@components/app/app';
 import {connect} from 'react-redux';
-import {ApiActionCreator} from '@store/api-action';
+import {handleInitialLoad} from '@store/service-actions';
+
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  makeInitialLoad() {
-    return Promise.resolve(
-        Promise.all([
-          dispatch(ApiActionCreator.fetchOffers()),
-          dispatch(ApiActionCreator.checkAuth()),
-        ])
-        .then(() => {
-          dispatch(ApiActionCreator.fetchFavorites());
-        })
-    );
-  },
+  makeInitialLoad: () => handleInitialLoad(dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

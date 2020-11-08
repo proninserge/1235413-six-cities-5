@@ -1,11 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
+import {AppRoute, ResponseCode} from '@constants';
+import browserHistory from '@/browser-history';
 
 const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
-
-const HttpCode = {
-  UNAUTHORIZED: 401,
-};
 
 const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -14,15 +12,27 @@ const createAPI = (onUnauthorized) => {
     withCredentials: true,
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response) => {
+    if (window.location.pathname === AppRoute.ERROR) {
+      browserHistory.push(AppRoute.ROOT);
+    }
+
+    return response;
+  };
 
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === HttpCode.UNAUTHORIZED) {
+    if (response.status === ResponseCode.NOT_FOUND || response.status >= ResponseCode.SERVER_ERROR) {
+      browserHistory.push(AppRoute.ERROR);
+      throw err;
+    }
+
+    if (response.status === ResponseCode.UNAUTHORIZED) {
       onUnauthorized();
       throw err;
     }
+
     throw err;
   };
 

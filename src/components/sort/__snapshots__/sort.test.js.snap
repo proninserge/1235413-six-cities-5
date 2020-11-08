@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sort /> render correctly renders Sort 1`] = `
+<form
+  action="#"
+  className="places__sorting"
+  method="get"
+>
+  <span
+    className="places__sorting-caption"
+  >
+    Sort by
+  </span>
+  <span
+    className="places__sorting-type"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Popular
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+</form>
+`;

@@ -14,7 +14,7 @@ const BookmarkButton = (props) => {
 
 BookmarkButton.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   className: PropTypes.string.isRequired,
 };
 

@@ -1,3 +1,23 @@
+const HotelType = {
+  APARTMENT: `apartment`,
+  PRIVATE_ROOM: `room`,
+  HOUSE: `house`,
+  HOTEL: `hotel`
+};
+
+const AppRoute = {
+  ROOT: `/`,
+  OFFER: `/offer/:id`,
+  FAVORITES: `/favorites`,
+  LOGIN: `/login`,
+  ERROR: `/error`
+};
+
+const FavoriteStatus = {
+  NOT_FAVORITE: 0,
+  FAVORITE: 1
+};
+
 const PROPERTY_AROUND_NUMBER = 3;
 const MAX_IMAGES_COUNT = 6;
 const MAX_REVIEWS_NUMBER = 10;
@@ -27,6 +47,8 @@ const ResponseCode = {
 };
 
 export {
+  AppRoute,
+  HotelType,
   CommentSymbolCount,
   MAX_REVIEWS_NUMBER,
   PROPERTY_AROUND_NUMBER,
@@ -34,4 +56,5 @@ export {
   Sorting,
   AuthorizationStatus,
   ResponseCode,
+  FavoriteStatus,
 };

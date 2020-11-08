@@ -9,13 +9,11 @@ const mapStateToProps = ({OFFERS}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange(city) {
+  onCityChange: (city) => {
     dispatch(ActionCreator.resetSortType());
     dispatch(ActionCreator.changeCity(city));
   },
-  onSortTypeClick(sortType) {
-    dispatch(ActionCreator.setSortType(sortType));
-  },
+  onSortTypeClick: (sortType) => dispatch(ActionCreator.setSortType(sortType)),
 });
 
 export {MainScreen};

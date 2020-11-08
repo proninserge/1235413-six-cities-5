@@ -1,8 +1,24 @@
 
 import {ActionCreator} from '@store/action';
 import {adaptOfferToClient} from '@store/adapters';
-import {AuthorizationStatus, ResponseCode} from '@constants';
+import {HotelType, AuthorizationStatus, ResponseCode} from '@constants';
 import {adaptReviewToClient} from '@store/adapters';
+import moment from 'moment';
+
+const getType = (type) => {
+  switch (type) {
+    case HotelType.APARTMENT:
+      return `Apartment`;
+    case HotelType.PRIVATE_ROOM:
+      return `Private Room`;
+    case HotelType.HOUSE:
+      return `House`;
+    case HotelType.HOTEL:
+      return `Hotel`;
+    default:
+      return `Apartment`;
+  }
+};
 
 const getStars = (rating) => {
   switch (Math.round(rating)) {
@@ -38,9 +54,9 @@ const getAuthorization = (dispatch, {status, data}) => {
   }
 };
 
-const getNearbyHotels = (dispatch, data) => dispatch(ActionCreator.getNearbyHotels(data)).data.map((datum) => adaptOfferToClient(datum));
+const getNearbyHotels = (data) => data.map((datum) => adaptOfferToClient(datum));
 
-const getOffer = (dispatch, data) => dispatch(ActionCreator.getOffer(adaptOfferToClient(data))).data;
+const getOffer = (data) => adaptOfferToClient(data);
 
 const getAdaptedOffers = (offers) => offers.map((offer) => adaptOfferToClient(offer));
 
@@ -61,4 +77,6 @@ const getInitialCity = (offers) => getCities(offers)[0];
 
 const getAdaptedReviews = (reviews) => reviews.length !== 0 ? reviews.map((review) => adaptReviewToClient(review)) : [];
 
-export {getStars, handleNavigationClick, getOffer, getNearbyHotels, getAuthorization, getAdaptedOffers, deleteOffer, getCities, getInitialCity, getAdaptedReviews};
+const getReadableDate = (date) => moment(date, `YYYY/MM/DD H:mm Z`).format(`MMMM YYYY`);
+
+export {getType, getReadableDate, getStars, handleNavigationClick, getOffer, getNearbyHotels, getAuthorization, getAdaptedOffers, deleteOffer, getCities, getInitialCity, getAdaptedReviews};

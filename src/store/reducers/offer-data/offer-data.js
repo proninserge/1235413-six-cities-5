@@ -3,9 +3,11 @@ import {Sorting} from '@constants';
 import {deleteOffer, getCities, getInitialCity} from '@/utils';
 
 const initialState = {
+  currentOffer: null,
   offers: [],
   currentCity: null,
   cities: [],
+  nearbyHotels: [],
   favoriteOffers: [],
   sortType: Sorting.POPULAR,
 };
@@ -41,6 +43,14 @@ const offerData = (state = initialState, action) => {
     case ActionType.DELETE_FAVORITE:
       return Object.assign({}, state, {
         favoriteOffers: deleteOffer(state, action.data.id),
+      });
+    case ActionType.GET_OFFER:
+      return Object.assign({}, state, {
+        currentOffer: action.data,
+      });
+    case ActionType.GET_NEARBY:
+      return Object.assign({}, state, {
+        nearbyHotels: action.data,
       });
     default: return state;
   }

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Preloader /> render correctly renders Offer List 1`] = `
+<h1
+  style={
+    Object {
+      "left": "50%",
+      "position": "fixed",
+      "textAlign": "center",
+      "top": "50%",
+      "transform": "translate(-50%, -50%)",
+    }
+  }
+>
+  Hold on a sec, we are loading
+  <br />
+  <small>
+    If it takes longer than a few secs,
+    <br />
+    please, refresh the page.
+  </small>
+</h1>
+`;

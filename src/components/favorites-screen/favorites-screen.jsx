@@ -53,7 +53,7 @@ const FavoritesScreen = (props) => {
                   <div className="favorites__places">
 
                     {getFavoritesForCity(offers, city).map((offer) => (
-                      <OfferCard key={offer.id} onOfferHover={()=>({})} onOfferClick={onOfferClick} favoriteOffers={offers} offer={offer} className={`favorites`}/>
+                      <OfferCard key={offer.id} onOfferHover={()=>({})} onOfferClick={onOfferClick} offer={offer} className={`favorites`}/>
                     ))}
 
                   </div>

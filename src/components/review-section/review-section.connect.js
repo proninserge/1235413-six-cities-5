@@ -1,11 +1,11 @@
 import ReviewSection from '@components/review-section/review-section';
 import {connect} from 'react-redux';
-import {ApiActionCreator} from '@store/api-action';
+import {handleNewReviewForHotel} from '@store/service-actions';
+
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  pushReviewForHotel(id, data) {
-    return Promise.resolve(dispatch(ApiActionCreator.pushReviewForHotel(id, data)));
-  }
+  pushReviewForHotel: (id, data) => handleNewReviewForHotel(id, data, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(ReviewSection);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewSection);
