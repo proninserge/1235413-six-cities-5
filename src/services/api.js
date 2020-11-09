@@ -13,7 +13,7 @@ const createAPI = (onUnauthorized) => {
   });
 
   const onSuccess = (response) => {
-    if (window.location.pathname === AppRoute.ERROR) {
+    if (browserHistory.location.pathname === AppRoute.ERROR) {
       browserHistory.push(AppRoute.ROOT);
     }
 
