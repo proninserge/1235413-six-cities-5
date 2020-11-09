@@ -9,10 +9,10 @@ class SignInScreen extends React.PureComponent {
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
+  _handleSubmit(evt) {
     const {onSubmit} = this.props;
     const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     evt.preventDefault();
@@ -59,7 +59,7 @@ class SignInScreen extends React.PureComponent {
                 className="login__form form"
                 action="#"
                 method="post"
-                onSubmit={this.handleSubmit}
+                onSubmit={this._handleSubmit}
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>

@@ -11,12 +11,16 @@ import rootReducer from '@store/reducers/root-reducer';
 
 import {ActionCreator} from '@store/action';
 import {AuthorizationStatus} from '@constants';
+import {redirect} from '@store/middlewares/redirect';
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
+const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect)
+));
 
 ReactDOM.render(
     <Provider store={store}>
